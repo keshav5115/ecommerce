@@ -12,4 +12,10 @@ def Product_view(request):
 
 def Review_view(request):
     form=Review_form()
+    if request.method =='POST':
+        form=Review_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/product')
+
     return render(request,'review.html',{'form':form})

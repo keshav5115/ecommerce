@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 200px;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    {% for product in pobj %}
+    <div>
+      <h3>product name:-{{product.product_name}}</h3>
+      <h3>price :- {{product.price}}</h3>
+      <h3>desc :- {{product.description}}</h3>
+      
+      {% for review in robj %}
+         {% if review.product_id == product.id %}
+         
+             <details>
+                <summary> review</summary>
+                <P>
+                    <label for="rating">rating:</label>
+                    <progress max="5" value="{{review.rating}}" id="rating"></progress> <br>
+                    {{review.text}}</P>
+             </details>
+        {% endif %}
+      {% endfor %}
+      <a href="{% url 'products:reviewread' pk=product.id  %}">review</a>
+      
+
+      <img src="{{product.product_image.url}}" alt="image">
+    </div>
+    {% endfor %}
+</body>
+</html>

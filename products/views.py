@@ -29,3 +29,13 @@ def ProductRead(request):
 def ReviewRead(request,pk):
     obj=Review.objects.filter(product_id=pk)
     return render(request,'proread.html',{'robj':obj})
+
+def ProductUpdate(request,pk):
+    obj=Product.objects.get(id=pk)
+    form=Product_form(instance=obj)
+    if request.method =='POST'  and request.FILES:
+        form=Product_form(request.POST,request.FILES,instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect('/proread')
+    return render(request,'proupdate.html',{'form':form,'obj':obj.product_image})

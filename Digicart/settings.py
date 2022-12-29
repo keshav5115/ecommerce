@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+TEMPLATES_CUSTOMER_DIRS=os.path.join(BASE_DIR,'customer','templates')
 TEMPLATES_PRODUCTS_DIRS=os.path.join(BASE_DIR,'products','templates')
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
+    'customer',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'Digicart.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_PRODUCTS_DIRS],
+        'DIRS': [TEMPLATES_PRODUCTS_DIRS,TEMPLATES_CUSTOMER_DIRS],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

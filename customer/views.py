@@ -2,10 +2,13 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .forms import CustomerForm
 from .models import Customer
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 def CustomerView(request):
     form=CustomerForm()
@@ -13,6 +16,13 @@ def CustomerView(request):
         form=CustomerForm(request.POST)
         if form.is_valid():
             form.save()
+            username=form.cleaned_data['username']
+            password=form.cleaned_data['password']
+            subject = f'Hi {username} welcome to Digicart'
+            message= f'Thank you for registering to Digicart and your username is {username} and password is {password}'
+            recipient_list=[form.cleaned_data['email']]
+            from_email=settings.EMAIL_HOST_USER
+            send_mail(subject,message,from_email,recipient_list)
             return HttpResponse('user is created')
 
 

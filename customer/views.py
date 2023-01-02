@@ -23,7 +23,8 @@ def CustomerView(request):
             recipient_list=[form.cleaned_data['email']]
             from_email=settings.EMAIL_HOST_USER
             send_mail(subject,message,from_email,recipient_list)
-            return HttpResponse('user is created')
+            messages.success(request,f'Hi {username} you successfully registerd to Digicart and username ,password has been sent to your registered email6')
+            return redirect('/cust/login/')
 
 
     return render(request,'custpage.html',{'form':form})

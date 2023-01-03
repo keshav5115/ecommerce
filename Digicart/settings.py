@@ -16,6 +16,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATES_CUSTOMER_DIRS=os.path.join(BASE_DIR,'customer','templates')
 TEMPLATES_PRODUCTS_DIRS=os.path.join(BASE_DIR,'products','templates')
+TEMPLATES_CBVAPP_DIRS=os.path.join(BASE_DIR,'cbvapp','templates')
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
 # Quick-start development settings - unsuitable for production
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'customer',
+    'cbvapp',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'Digicart.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_PRODUCTS_DIRS,TEMPLATES_CUSTOMER_DIRS],
+        'DIRS': [TEMPLATES_PRODUCTS_DIRS,TEMPLATES_CUSTOMER_DIRS,TEMPLATES_CBVAPP_DIRS],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

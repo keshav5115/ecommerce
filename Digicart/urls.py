@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('products.urls')),
     path('cust/',include('customer.urls')),
+    path('cbv/',include('cbvapp.urls')),
 ]
 
 if settings.DEBUG:

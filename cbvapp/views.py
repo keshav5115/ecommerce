@@ -60,3 +60,39 @@ class Cbvorderread(View):
         obj=Orders.objects.all()
         
         return render(request,'orderread.html',{'obj':obj})
+
+#------------predefined class based views---------------
+def msg(request):
+    return HttpResponse('data is created')
+
+class Pcvcreate(CreateView):
+    model=Orders
+    # form_class=ordersform
+    fields=['product','customer','quantity']
+    template_name='order.html'
+    # context_object_name='data'
+    success_url='/cbv/msg/'
+
+class Pcvlistview(ListView):
+    model=Orders
+    template_name='orderread.html'
+    context_object_name='obj'
+
+class Pcvdetailview(DetailView):
+    model=Orders
+    template_name='orderdetail.html'
+    context_object_name='obj'
+
+class pcvupdateview(UpdateView):
+    model=Orders
+    form_class=ordersform
+    template_name='orderupdate.html'
+    success_url='/cbv/cbvorderread/'
+
+
+class pcvdeleteview(DeleteView):
+    model=Orders
+    # form_class=ordersform
+    template_name='delete.html'
+    context_object_name='data'
+    success_url='/cbv/cbvorderread/'
